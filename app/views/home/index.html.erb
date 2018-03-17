@@ -33,7 +33,7 @@
                     
                     <% Event.where(user_id: current_user.id).reverse.each do |note|
                      %>
-                     <%=  note.message %><br>
+                     <%=  note.message %> <a href='/orders/<%=  note.order_id %>'>Join</a><br>
                      <% end %>
                 </div>
                 <div class="clearfix"> </div>
