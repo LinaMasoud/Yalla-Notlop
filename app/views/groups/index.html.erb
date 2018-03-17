@@ -20,9 +20,9 @@
 
         <% if group.user == current_user %>
         <td><%= link_to group.name, group %></td>
-         <td rowspan="3"> </td>
+         
         <td><%= link_to 'Display', group %></td>
-         <td rowspan="3"> </td>
+         
         <td><%= link_to 'Delete Group', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
       </tr>

@@ -7,16 +7,16 @@ class Order < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
   
 
- 
-  	
-
 
   after_create_commit { create_event }
   def create_event()
   	@orderid = Order.last.id
   	@userIDs = User.joins(:orders).where(orders: {id: @orderid})
+    @name  = User.find(Order.find(@orderid).user_id).name
+    @place = Order.find(@orderid).orderFrom
+    @txt = @name + " Invited You To Order From " + @place 
   	@userIDs.each  do |user|
-    	@event = Event.create message: "A new order has been created", user_id: user.id
+    	@event = Event.create message: @txt, user_id: user.id,order_id:@orderid
 	end
   end
   

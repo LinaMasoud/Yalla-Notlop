@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+  - "2.4.3"
+services:
+  - mysql
+env:
+  - DB=mysql
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - mysql -e 'create database myapp_test'      
+  - export DISPLAY=:99.0
+script: 
+  - RAILS_ENV=test bundle exec rake db:schema:load --trace
+  - bundle exec rake db:test:prepare
+
+

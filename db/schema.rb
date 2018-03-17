@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180316152735) do
+ActiveRecord::Schema.define(version: 20180317143457) do
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_events_on_order_id"
   end
 
   create_table "friends", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -118,6 +120,9 @@ ActiveRecord::Schema.define(version: 20180316152735) do
     t.datetime "image_updated_at"
     t.string "provider"
     t.string "uid"
+    t.string "auth_token"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
