@@ -1,12 +1,14 @@
-
-
-
-
-
 <div class="agileinfo-heading" style="padding-bottom: 10px; padding-top: 10px">
+
     <h4> My Groups: </h4>
+
   </div>
-<div class="col-md-9">
+<div  class="container"> 
+  <div class="col-md-6" style="padding-top: 20px;padding-bottom: 20px;">
+        <div class="agileinfo-heading">
+          <h4>Groups</h4>    
+        </div>
+      </div>
 <table class="table table-hover">
   <thead>
     
@@ -14,9 +16,8 @@
   <tbody>
     <% @groups.each do |group| %>
 
+      <tr class="table-active">
 
-
-      <tr class="table-primary">
         <% if group.user == current_user %>
         <td><%= link_to group.name, group %></td>
          
@@ -34,3 +35,6 @@
 <div class="text-center" style="padding-top: 5%">
 <%= link_to 'New Group', new_group_path , class: "btn btn-danger btn-lg"%>
 </div>
+<br>
+</div>
+

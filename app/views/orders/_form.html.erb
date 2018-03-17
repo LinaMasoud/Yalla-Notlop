@@ -1,8 +1,8 @@
+<div class="container">
 <%= form_with(model: order, local: true, html: { multipart: true }) do |form| %>
   <% if order.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
-
       <ul>
       <% order.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,28 +11,36 @@
     </div>
   <% end %>
 <%= form.hidden_field :user_id, id: current_user.id %>
-  <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :orderType, id: :order_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :orderFrom %>
-    <%= form.text_field :orderFrom, id: :order_orderFrom %>
-  </div>
-
-  <div class="form-input">
-    <%= form.label :image %>
-     <%= form.file_field :image %>
-   </div>
-   <% @users.each do |u| %>
-   <p><%= u.friend_id %></p>
-   <% end %>
-   <div class="field">
-  <%= collection_check_boxes(:order, :user_ids, @users, :friend_id, :name_with_initial) %>
-  </div>
-  
-  <div class="actions">
-    <%= form.submit %>
+<div class="col-md-8 text-left">
+    <table class="table table-hover">
+      <tbody>
+        <tr class="table-active">
+          <td><%= form.label :type %></td>
+          <td><%= form.text_field :orderType, id: :order_type %></td>
+        </tr>
+        <tr class="table-active">
+          <td><%= form.label :orderFrom %></td>
+          <td><%= form.text_field :orderFrom, id: :order_orderFrom %></td>
+        </tr>
+        <tr class="table-active">
+          <td><%= form.label :image %></td>
+          <td><%= form.file_field :image %></td>
+        </tr>
+        <tr class="table-active">
+          
+          <td><%= form.label :InviteFriends %></td>
+          <td><%= collection_check_boxes(:order, :user_ids, @users, :friend_id, :name_with_initial) %></td>
+        </tr>
+        <tr>
+          <td> <%= form.submit%></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 <% end %>
+
+<div style="float: left;">
+  
+</div>
+
+</div>

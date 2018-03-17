@@ -11,7 +11,6 @@ Rails.application.routes.draw do
 
 
 
-  
   get 'events/index'
   mount ActionCable.server => '/cable'
 

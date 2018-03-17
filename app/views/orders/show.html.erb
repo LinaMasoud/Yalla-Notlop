@@ -1,79 +1,144 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @order.orderType %>
-</p>
-
-<p>
-  <strong>Orderfrom:</strong>
-  <%= @order.orderFrom %>
-</p>
-
-<p>
-  <strong>Menuimage:</strong>
-  <%= image_tag @order.image.url(:medium) %>
-</p>
-
-<p>
-  <strong>Created By:</strong>
-  <%= @order.user.name %>
-</p>
-<p>
-  <strong>Invited Users:</strong>
- <% @invited_friends.each do |f| %>
-      <p><%= f.name %></p>
- <% end %> 
-</p>
-<h2>Items</h2>
-<% @order.items.each do |item| %>
-  <p>
-    <strong>Item:</strong>
-    <%= item.item %>
-  </p>
-  <p>
-    <strong>Amount:</strong>
-    <%= item.amount %>
-  </p>
-  <p>
-    <strong>Price:</strong>
-    <%= item.price %>
-  </p>
- 
-  <p>
-    <strong>Comment:</strong>
-    <%= item.comment %>
-  </p>
-  <p>
-  	<%= link_to 'Destroy Item', [item.order, item],
+<!-- <div class="col-md-3 text-left pagination">
+  <h3>Order:</h3>
+    <table class="table table-hover">
+      <tbody>
+          <tr class="table-active">
+            <td>Type:</td>
+            <td><%= @order.orderType %></td>
+          </tr>
+          <tr class="table-active">
+            <td>Restaurant:</td>
+            <td> <%= @order.orderFrom %></td>
+          </tr>
+          <tr class="table-active">
+            <td>Menu Image:</td>        
+            <td>  <%= image_tag @order.image.url(:medium) %></td>
+          </tr>
+          <tr class="table-active">
+            <td>Created By:</td>        
+            <td><%= @order.user.name %></td>
+          </tr>
+          <tr class="table-active">
+            <td>Invited Users:</td>  
+            <td>  <ul>    
+            <% @invited_friends.each do |f| %>
+            <li><%= f.name %></li>
+            <% end %> </ul>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+  </div> -->
+<div class="col-md-8 text-left">
+  <h3>Order Details:</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <td>Person:</td>
+          <td>Item:</td>
+          <td>Amount:</td>
+          <td>Price:</td>
+          <td>Comment:</td> 
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.items.each do |item| %>
+          <tr class="table-active">
+            <td><%= item.user.name %></td>
+            <td><%= item.item %></td>
+            <td><%= item.amount %></td>   
+            <td><%= item.price %></td>  
+            <td><%= item.comment %></td> 
+            <td><%= link_to 'Destroy Item', [item.order, item],
                method: :delete,
-               data: { confirm: 'Are you sure?' },class:'btn btn-primary'  %>
-  </p>
-<% end %>
+               data: { confirm: 'Are you sure?' }  %></td>              
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="col-md-12 text-right">
+      <p> User invited : <%= link_to   @invited.size , id="myBtn" %></p>
 
+      <!-- <div id="myModal" class="modal"> -->
 
-<h2>Add a Item:</h2>
-<%= form_with(model: [ @order, @order.items.build ], local: true) do |form| %>
+  <!-- Modal content -->
+        <!-- <div class="modal-content"> -->
+            <!-- <span class="close">&times;</span> -->
+            <% @invited.each do |i| %>
+              <div class="col-sm-4">
+                <%=image_tag(User.find(i.user_id).image.url, :width => 60, :height => 60, :crop => :fill) %>
+                    <h5>   <%= User.find(i.user_id).name %></h5>
+                </div>
+              <% end %>
+          <!-- </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+
+  <div class="col-md-8 text-left">
+  <h3>Add Item:</h3>
+  <%= form_with(model: [ @order, @order.items.build ], local: true) do |form| %>
   <%= form.hidden_field 'user_id' , value: current_user.id %> 
-  <p>
-    <%= form.label :item %><br>
-    <%= form.text_field :item %>
-  </p>
-  <p>
-    <%= form.label :amount %><br>
-    <%= form.number_field :amount %>
-  </p>
-  <p>
-    <%= form.label :price %><br>
-    <%= form.number_field :price %>
-  </p>
-  <p>
-    <%= form.label :comment %><br>
-    <%= form.text_area :comment %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <td><%= form.label :item %></td>
+          <td><%= form.label :amount %></td>
+          <td><%= form.label :price %></td>
+          <td><%= form.label :comment %></td>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="table-active">
+            <td><%= form.text_field :item %></td>
+            <td><%= form.number_field :amount %></td>
+            <td><%= form.number_field :price %></td>   
+            <td><%= form.text_area :comment %></td>  
+            <td><%= form.submit %></td>            
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  
+  
+
+
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
+<script>
+    var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    var btn2 = document.getElementById("myBtn2");
+
+
+// Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    btn2.onclick = function() {
+        modal.style.display = "block";
+    }
+
+
+// When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+// When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+  </script>

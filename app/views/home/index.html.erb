@@ -1,40 +1,118 @@
-<% if user_signed_in? %>
-	
-	<div class="col-md-6">
-		<%=image_tag(current_user.image.url, :width => 200, :height => 200, :crop => :fill) %>				
-	
-	</div>
-	</br>
-	<div class="col-md-3 text-left">
-		<table class="table table-hover">
-			<tbody>
-    			<tr class="table-active">
-    				<td>Name:</td>
-      				<td> <%= current_user.name %></td>
-    			</tr>
-    			<tr class="table-active">
-    				<td>Email:</td>
-					<td><%= current_user.email %></td>
-    			</tr>
-    			<tr>
-    				<td>Orders:</td> 				
-    				<% Order.joins(:users).where(users: {id: current_user.id}).each do |order| %>
-    				<td> <%= order.orderFrom %></td>
-    				<%end %>
-    			</tr>
-    			<tr class="table-active">
-					<td><%= link_to "Edit Your Profile", edit_user_registration_path %></td>
-    			</tr>
-    			<tr>
-    				<td><%= link_to "Log out", destroy_user_session_path, method: :delete %>	
-</td>
-    			</tr>
-    		</tbody>
-		</table>
-	</div>
-	
+<div class="welcome">
+        <div class="container">
+            <div class="agileinfo-heading">
+                <h3>Welcome</h3>
+            </div>
+            <div class="agileits-welcome-grids">
+                <div class="col-md-6 agileits-welcome-left">
+                    <div class="agileinfo-heading">
+                    <h4>Latest orders </h4>
+                    </div>
+                                <div class="agile-border"> </div>
 
-<%else%>
-	<%= link_to "Sign In", new_user_session_path %>
-	<%= link_to "Sign Up", new_user_registration_path %>
-<%end%>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Lunch type</th>
+                                <th scope="col">Time created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-active">
+                                <td>BreakFast</td>
+                                <td>8/3/2018</td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+                <div class="col-md-6 agileits-welcome-left">
+                    <div class="agileinfo-heading">
+                    <h4> Friends Activity</h4>
+                    </div>
+                    <div class="agile-border"> </div>
+                    
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Freind Name</th>
+                                <th scope="col">Order Time</th>
+                                <th scope="col"> Restaurant</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-active">
+                                <td><a href="#">Ahmed Ali</a></td>
+                                <td><a href="#">8/3/2018</a></td>
+                                <td>Wellies kithchen</td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!-- //welcome -->
+    <!-- history -->
+    <div class="history jarallax">
+        <div class="history-dot">
+            <div class="container">
+                <div class="agileinfo-history-grids">
+                    <div class="slider">
+                        <div class="callbacks_container">
+                            <ul class="rslides" id="slider3">
+                                <li>
+                                    <div class="wthree-history-info">
+                                        <h4>Lorem ipsum dolor sit amet, consectetur</h4>
+                                        <p>Mauris mollis, libero id ornare condimentum, erat mi iaculis libero, bibendum dictum leo tortor a magna. Aenean porta non nunc in semper. Fusce eget tempus metus, sit amet posuere lectus. Morbi cursus ante a felis ultrices scelerisque. Nullam cursus odio est, in pellentesque neque elementum nec. Pellentesque a egestas erat.</p>
+                                        <a href="freinds.html">Read More</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="wthree-history-info">
+                                        <h4>Vivamus placerat velit placerat elementum</h4>
+                                        <p>Nullam tristique faucibus pharetra. Ut ultricies, dui a tincidunt placerat, urna augue pellentesque leo, et posuere velit neque quis justo. Vivamus vel nulla vel tellus pretium maximus. Pellentesque auctor euismod lectus a pretium. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                        <a href="freinds.html">Read More</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="wthree-history-info">
+                                        <h4>Donec pellentesque felis sit amet vehicula</h4>
+                                        <p>Donec viverra enim nunc, sit amet ultricies dolor placerat vestibulum. Donec id dapibus dolor. Praesent elementum ipsum fringilla ullamcorper facilisis. Morbi blandit tortor molestie ex dignissim, vitae blandit metus ullamcorper. Praesent eleifend risus quam, et aliquet eros tristique a. Duis rhoncus auctor urna, id tristique quam gravida in. </p>
+                                        <a href="freinds.html">Read More</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <script>
+                                    // You can also use "$(window).load(function() {"
+                                    $(function () {
+                                      // Slideshow 4
+                                      $("#slider3").responsiveSlides({
+                                        auto: true,
+                                        pager:false,
+                                        nav:false,
+                                        speed: 500,
+                                        namespace: "callbacks",
+                                        before: function () {
+                                          $('.events').append("<li>before event fired.</li>");
+                                        },
+                                        after: function () {
+                                          $('.events').append("<li>after event fired.</li>");
+                                        }
+                                      });
+                                
+                                    });
+                                 </script>
+                                <!--banner Slider starts Here-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //history -->
+    <!-- subscribe -->
+    <div class="wthree-subscribe">
+        
+    </div>
+    

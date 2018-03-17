@@ -1,8 +1,8 @@
 class Event < ApplicationRecord
-	after_create_commit { EventBroadcastJob.perform_later self }
-# 	after_create_commit {broadcast_notification}
-
-# def broadcast_notification
-#   ActionCable.server.broadcast "activity_channel_#{self.user_id}", message: 'some message'
-# end
+	after_create_commit { notify }
+	private
+	def notify
+		@uID = self.user_id
+		ActionCable.server.broadcast 'user_channel'+@uID.to_s, data: self.message
+	end
 end

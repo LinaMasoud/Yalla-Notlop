@@ -3,7 +3,6 @@
   <head>
     <title>YallaNotlop</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -18,7 +17,7 @@
 							<!-- Brand and toggle get grouped for better mobile display -->
 							<div class="navbar-header">
 								 <div class="navbar-brand logo ">
-									<h1><a href="index.html">Yalla <span>Notlob</span></a></h1>
+									<h1><a href="/home/index.html">Yalla <span>Notlob</span></a></h1>
 								</div>
 							</div>
 							<!-- Collect the nav links, forms, and other content for toggling -->
@@ -35,7 +34,8 @@
 					<div class="header-left">
 						<ul>
 							<% if user_signed_in? %>
-							<li><%=image_tag(current_user.image.url, :width => 50, :height => 50, :crop => :fill) %><%=link_to  " #{current_user.name}"%></li>
+							<li><%=image_tag(current_user.image.url, :width => 50, :height => 50, :crop => :fill) %><%= link_to "#{current_user.name}", edit_user_registration_path %>
+
 							<li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
             <% else %>
               <li><%= link_to('Login', new_user_session_path) %></li> 
@@ -48,9 +48,9 @@
 					<div class="clearfix"></div>	
 				</div>
 			</div>
-			<div class="w3-agile-main-heading">
+			<!-- <div class="w3-agile-main-heading">
 				<h2>Orders</h2>
-			</div>
+			</div> -->
 		</div>
 		<!-- //agileinfo-dot -->
 	</div>
@@ -76,12 +76,12 @@
 					</div>
 					<div class="footer-grid-info">
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="freinds.html">About</a></li>
-							<li><a href="groups.html">Gallery</a></li>
+							<li><a href="/home/index.html">Home</a></li>
+							<!-- <li><a href="freinds.html">About</a></li> -->
+							<!-- <li><a href="groups.html">Gallery</a></li>
 							<li><a href="icons.html">Icons</a></li>
 							<li><a href="codes.html">Short Codes</a></li>
-							<li><a href="order.html">Contact</a></li>
+							<li><a href="order.html">Contact</a></li> -->
 						</ul>
 					</div>
 				</div>

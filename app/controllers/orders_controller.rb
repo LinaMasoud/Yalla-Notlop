@@ -7,18 +7,22 @@ class OrdersController < ApplicationController
   def index
     # @orders = Order.all
     # @orders = Order.where(user_id: current_user.id)
-    @orders = Order.joins(:users).where(users: {id: current_user.id})
-    @myOrders = Order.where(user_id: current_user.id)
+    @friendships=Friendship.where(user_id: current_user.id)
+    @orders = Order.joins(:users).where(users: {id: current_user.id}).paginate(page: params[:page], per_page: 2)
+    @myOrders = Order.where(user_id: current_user.id).paginate(page: params[:page], per_page: 2)
   end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
-    @invited_friends = User.joins(:orders).where(orders: {id: params[:id]})
+     @invited_friends = User.joins(:orders).where(orders: {id: params[:id]})
+    @invited = OrdersUser.where(order_id: @order.id)
+    # @invited_friends = @order.ordersusers
   end
 
   # GET /orders/new
   def new
+    @friendships=Friendship.where(user_id: current_user.id)
     @order = Order.new
     @users = Friendship.where(user_id: current_user.id)
   end

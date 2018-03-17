@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
-<div class="container"> 
+<div  class="container"> 
       <div class="col-md-6" style="padding-top: 20px;padding-bottom: 20px;">
         <div class="agileinfo-heading">
-          <h4>Invited Orders List</h4>
+          <h4>Invited Orders List</h4>    
         </div>
       </div>
       <div class="col-md-6" style="padding-top: 20px;padding-bottom: 20px;">
@@ -19,7 +19,7 @@
                 <th scope="col">Order Menu</th>
                <!--  <th scope="col">Status</th> -->
                 <th scope="col">Actions</th>
-
+            
             </tr>
           </thead>
 
@@ -45,6 +45,7 @@
                 </tr>
             <% end %>
   </tbody>
+  
       </table> 
       <div class="col-md-6" style="padding-top: 20px;padding-bottom: 20px;">
         <div class="agileinfo-heading">
@@ -75,9 +76,17 @@
                   </td>
                 </tr>
             <% end %>
-  </tbody>
+          </tbody>
+         
       </table>          
       <div class="clearfix"> </div>
-      </div>
+      <%= will_paginate @orders, renderer: BootstrapPagination::Rails ,inner_window: 1, outer_window: 0%>
       
+     
+     <!-- <%= will_paginate @myOrders, renderer: BootstrapPagination::Rails ,inner_window: 1, outer_window: 0%> -->
     </div>  
+
+
+    
+
+     
