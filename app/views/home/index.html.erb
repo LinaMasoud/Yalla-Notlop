@@ -25,28 +25,16 @@
                         </tbody>
                     </table> 
                 </div>
-                <div class="col-md-6 agileits-welcome-left">
+                <div class="col-md-6 agileits-welcome-left" id="notifi">
                     <div class="agileinfo-heading">
                     <h4> Friends Activity</h4>
                     </div>
                     <div class="agile-border"> </div>
                     
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Freind Name</th>
-                                <th scope="col">Order Time</th>
-                                <th scope="col"> Restaurant</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="table-active">
-                                <td><a href="#">Ahmed Ali</a></td>
-                                <td><a href="#">8/3/2018</a></td>
-                                <td>Wellies kithchen</td>
-                            </tr>
-                        </tbody>
-                    </table> 
+                    <% Event.where(user_id: current_user.id).reverse.each do |note|
+                     %>
+                     <%=  note.message %><br>
+                     <% end %>
                 </div>
                 <div class="clearfix"> </div>
             </div>
