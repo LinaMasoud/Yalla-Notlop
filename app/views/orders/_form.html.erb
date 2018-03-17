@@ -27,9 +27,8 @@
           <td><%= form.file_field :image %></td>
         </tr>
         <tr class="table-active">
-          
           <td><%= form.label :InviteFriends %></td>
-          <td><%= collection_check_boxes(:order, :user_ids, @users, :friend_id, :name_with_initial) %></td>
+          <td><%= collection_check_boxes(:order, :user_ids, @friends, :friend_id, :name_with_initial) %>
         </tr>
         <tr>
           <td> <%= form.submit%></td>
