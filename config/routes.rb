@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   #resources :friendships
   #resources :orders
 
-  post 'password/forgot', to: 'password#forgot'
-  post 'password/reset', to: 'password#reset'
-  put 'password/update', to: 'password#update'
+  #post 'password/forgot', to: 'password#forgot'
+  #post 'password/reset', to: 'password#reset'
+  #put 'password/update', to: 'password#update'
 
 
 
