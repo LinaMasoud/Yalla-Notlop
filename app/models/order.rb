@@ -16,7 +16,7 @@ class Order < ApplicationRecord
     @place = Order.find(@orderid).orderFrom
     @txt = @name + " Invited You To Order From " + @place 
   	@userIDs.each  do |user|
-    	@event = Event.create message: @txt, user_id: user.id
+    	@event = Event.create message: @txt, user_id: user.id,order_id:@orderid
 	end
   end
   
