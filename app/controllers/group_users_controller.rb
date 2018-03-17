@@ -30,7 +30,8 @@ class GroupUsersController < ApplicationController
 
     respond_to do |format|
       if @group_user.save
-        format.html { redirect_to groups_path(@group_user), notice: 'Group user was successfully created.' }
+        format.html { redirect_to group_users_path(@group_user), notice: ' your friend add to group ' +@group.name + '  successfully .' }
+  
         format.json { render :show, status: :created, location: @group_user }
       else
         format.html { render :new }
@@ -62,7 +63,7 @@ class GroupUsersController < ApplicationController
     @group_user.destroy
     
     respond_to do |format|
-      format.html { redirect_to group_users_url, notice: 'Group user was successfully destroyed.' }
+      format.html { redirect_to group_users_url, notice: ' your friend was successfully removed from group ' +@group_user.group.name }
       format.json { head :no_content }
     end
   end
