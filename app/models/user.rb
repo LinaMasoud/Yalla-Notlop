@@ -1,5 +1,8 @@
 class User < ApplicationRecord
 	has_and_belongs_to_many :orders
+
+  before_create { generate_token(:auth_token) }
+
 	#has_and_belongs_to_many :groups
 	has_many :order
     has_many :groups, dependent: :destroy
@@ -27,6 +30,18 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end      
   	end
+   def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
+  def send_password_reset
+  generate_token(:password_reset_token)
+  self.password_reset_sent_at = Time.zone.now
+  save!
+  UserMailer.password_reset(self).deliver
+end
+
 
 
    

@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
   default_url_options :host => "example.com"
   resources :group_users
   resources :groups
   #resources :friendships
   #resources :orders
+  resources :password_resets
 
   #post 'password/forgot', to: 'password#forgot'
   #post 'password/reset', to: 'password#reset'

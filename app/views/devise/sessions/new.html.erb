@@ -14,6 +14,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--//online fonts-->
 </head>
 <body>
+  <p id="notice"><%= notice %></p>
   <h1>Ya<span>ll</span>a N<span>o</span>tlop l<span>o</span>g<span>in</span> f<span>o</span>rm</h1>
   <div class="wthree-form">
       <h2>Fill out the form below to login</h2>
@@ -33,11 +34,13 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
             <span><%= f.label :remember_me %></span>
         <% end -%>
         </label>
+        <p><%= link_to "forgotten password?", new_password_reset_path %></p>
         <div class="submit-agileits">
           <%= f.submit "Login" %>   
         </div>
        <%= render "devise/shared/links" %>
        <% end %>
+
     </div>
   </div>
 </body>
