@@ -1,0 +1,2 @@
+module OrderJoinedHelper
+end

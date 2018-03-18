@@ -91,5 +91,17 @@
 			
 		</div>
 	</div>
+	<script type="text/javascript">
+		function joinOrder(e) {
+	$.ajax({
+		method: 'post',
+        url: '/order_joined/add',
+        data: {oid:$(e).attr('id'), authenticity_token:$('meta[name="csrf-token"]').attr("content")},
+        success: function(result){
+        	window.location.replace("/orders/"+$(e).attr('id'));
+        }
+	})
+}
+	</script>
   </body>
 </html>
