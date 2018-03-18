@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180317143457) do
+ActiveRecord::Schema.define(version: 20180318151302) do
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "message"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 20180317143457) do
     t.index ["order_id"], name: "index_notifications_on_order_id"
   end
 
+  create_table "order_joins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "order_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_joins_on_order_id"
+    t.index ["user_id"], name: "index_order_joins_on_user_id"
+  end
+
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "orderType"
     t.string "orderFrom"
@@ -133,6 +142,8 @@ ActiveRecord::Schema.define(version: 20180317143457) do
   add_foreign_key "items", "orders"
   add_foreign_key "items", "users"
   add_foreign_key "notifications", "orders"
+  add_foreign_key "order_joins", "orders"
+  add_foreign_key "order_joins", "users"
   add_foreign_key "orders", "users"
   add_foreign_key "orders_users", "orders"
   add_foreign_key "orders_users", "users"

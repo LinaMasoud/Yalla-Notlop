@@ -44,6 +44,8 @@ class OrdersController < ApplicationController
     # @friend.orders << @order
     respond_to do |format|
       if @order.save
+        @orderJoin = OrderJoin.new(:order_id => @order.id,:user_id => current_user.id)
+        @orderJoin.save
         format.html { redirect_to orders_path, notice: 'Order was successfully created.' }
         # format.json { render :show, status: :created, location: @order }
       else
