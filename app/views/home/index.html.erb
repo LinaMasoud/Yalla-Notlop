@@ -31,7 +31,7 @@
                     </div>
                     <div class="agile-border"> </div>
                     
-                    <% Event.where(user_id: current_user.id).reverse.each do |note|
+                    <% Event.where(user_id: current_user.id).where.not(status: 2).reverse.each do |note|
                      %>
                      <%=  note.message %> <a href='/orders/<%=  note.order_id %>'>Join</a><br>
                      <% end %>

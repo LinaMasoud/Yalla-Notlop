@@ -102,6 +102,18 @@
         }
 	})
 }
+	function cancel(e) {
+	$.ajax({
+		method: 'post',
+        url: '/order_joined/cancel',
+        data: {oid:$(e).prev().attr('id'), authenticity_token:$('meta[name="csrf-token"]').attr("content")},
+        success: function(result){
+        	$(e).prev().remove();
+        	$(e).remove();
+        }
+	})
+}
+
 	</script>
   </body>
 </html>

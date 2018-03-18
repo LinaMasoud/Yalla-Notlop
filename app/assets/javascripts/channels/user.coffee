@@ -7,6 +7,6 @@ App.user = App.cable.subscriptions.create "UserChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    $("#notifi").append("<p>"+data.data.msg+"</p>"+"<button id='"+data.data.order+"' onclick='joinOrder(this)'>Join</button>")
+    $("#notifi").append("<p>"+data.data.msg+"</p>"+"<button id='"+data.data.order+"' onclick='joinOrder(this)'>Join</button>"+"<button onclick='cancel(this)'>Cancel</button>")
 
 
