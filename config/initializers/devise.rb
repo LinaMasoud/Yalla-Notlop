@@ -16,8 +16,7 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   config.omniauth :facebook,"251124742095965", "153de73d2f0748b04e5d410abaf20215"
-
-  # Configure the class responsible to send e-mails.
+  config.omniauth :google_oauth2, "180006239602-8rolc8n74263rmqr6qb96te558s1f2uc.apps.googleusercontent.com","KKb2rfKfGXA6LxSeUgd9k2fY",callback_url: "http://localhost:3000/users/auth/google_oauth2/callback"  # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
