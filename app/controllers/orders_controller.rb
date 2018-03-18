@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :order_params, only: [:create, :update]
+  # before_action :order_group, only: [:create, :update]
 
   # GET /orders
   # GET /orders.json
@@ -16,16 +17,16 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-     @invited_friends = User.joins(:orders).where(orders: {id: params[:id]})
+    @invited_friends = User.joins(:orders).where(orders: {id: params[:id]})
     @invited = OrdersUser.where(order_id: @order.id)
     # @invited_friends = @order.ordersusers
   end
 
   # GET /orders/new
   def new
-    @friendships=Friendship.where(user_id: current_user.id)
-    @order = Order.new
-    @users = Friendship.where(user_id: current_user.id)
+    @friends=Friendship.where(user_id: current_user.id)
+    @groups = User.find(current_user.id).groups
+    @order = Order.new   
   end
 
   # GET /orders/1/edit
@@ -39,9 +40,6 @@ class OrdersController < ApplicationController
   def create
     @user = current_user
     @order = @user.order.new(order_params)
-
-    # @friend = User.find(order_friend['friend'])
-    # @friend.orders << @order
     respond_to do |format|
       if @order.save
         @orderJoin = OrderJoin.new(:order_id => @order.id,:user_id => current_user.id)
@@ -95,4 +93,7 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(:user_id, :orderType, :orderFrom, :image, :user_ids => [])
     end
+    # def group_params
+    #   params.require(:order).permit(:group_ids => [])
+    # end
 end

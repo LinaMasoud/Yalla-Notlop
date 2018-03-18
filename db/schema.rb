@@ -130,6 +130,9 @@ ActiveRecord::Schema.define(version: 20180318172532) do
     t.datetime "image_updated_at"
     t.string "provider"
     t.string "uid"
+    t.string "auth_token"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

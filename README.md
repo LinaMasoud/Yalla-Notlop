@@ -23,3 +23,4 @@ Things you may want to cover:
 
 * ...
 # Yalla-Notlop
+[![Build Status](https://travis-ci.org/LinaMasoud/Yalla-Notlop.svg?branch=master)](https://travis-ci.org/LinaMasoud/Yalla-Notlop)
