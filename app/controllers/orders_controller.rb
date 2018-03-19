@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :order_params, only: [:create, :update]
-  # before_action :order_group, only: [:create, :update]
 
   # GET /orders
   # GET /orders.json
@@ -31,7 +30,8 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
-    @users = Friendship.where(user_id: current_user.id)
+    @friends = Friendship.where(user_id: current_user.id)
+    @groups = User.find(current_user.id).groups
   end
 
 
@@ -42,8 +42,14 @@ class OrdersController < ApplicationController
     @order = @user.order.new(order_params)
     respond_to do |format|
       if @order.save
-        @orderJoin = OrderJoin.new(:order_id => @order.id,:user_id => current_user.id)
-        @orderJoin.save
+        group_params['group_ids'].each do |g|
+        gu  =  GroupUser.where(group_id: g)
+        gu.each do |u|
+          @u = User.find(u.user_id)
+          @u.orders << Order.find(@order.id)
+        end
+      end
+
         format.html { redirect_to orders_path, notice: 'Order was successfully created.' }
         # format.json { render :show, status: :created, location: @order }
       else
@@ -52,6 +58,7 @@ class OrdersController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
@@ -91,9 +98,9 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:user_id, :orderType, :orderFrom, :image, :user_ids => [])
+      params.require(:order).permit(:user_id, :status, :orderType, :orderFrom, :image, :user_ids => [])
     end
-    # def group_params
-    #   params.require(:order).permit(:group_ids => [])
-    # end
+    def group_params
+      params.require(:group).permit(:group_ids => [])
+    end
 end
