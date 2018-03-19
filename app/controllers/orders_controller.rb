@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :finish]
   before_action :order_params, only: [:create, :update]
 
   # GET /orders
@@ -87,6 +87,13 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def finish
+    Order.update(params[:id],:status => 'Finished')
+    respond_to do |format|
+      format.html { redirect_to @order, notice: 'Order Set To Be Finished.' }
     end
   end
 
