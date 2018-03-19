@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :password_resets
 
   post '/friendships/create', to: 'friendships#create'
+  post '/friendships/destroy', to: 'friendships#destroy'
+
   #post 'password/forgot', to: 'password#forgot'
   #post 'password/reset', to: 'password#reset'
   #put 'password/update', to: 'password#update'

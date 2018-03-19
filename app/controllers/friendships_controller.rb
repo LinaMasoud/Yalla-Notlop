@@ -20,10 +20,14 @@ class FriendshipsController < ApplicationController
   end
   
   def destroy
-    @friendship = current_user.friendships.find(params[:id])
-    @friendship.destroy
-    flash[:notice] = "Removed friendship."
-    redirect_to friendships_path
+    @friendship = Friendship.where(user_id: current_user.id, friend_id:params[:id]).first
+    if @friendship.destroy
+         render json: {error:false, msg:"friendship destroied"}
+    else
+      render json: {error:true, msg:"friendship not destroiy"}
+    end
+    #flash[:notice] = "Removed friendship."
+    #redirect_to friendships_path
   end
   def find
     @friend = User.where(email: params[:fmail]).take
