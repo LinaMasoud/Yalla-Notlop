@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   default_url_options :host => "example.com"
   resources :group_users
   resources :groups
-  #resources :friendships
+  resources :friendships
   #resources :orders
   resources :password_resets
 
+  post '/friendships/create', to: 'friendships#create'
   #post 'password/forgot', to: 'password#forgot'
   #post 'password/reset', to: 'password#reset'
   #put 'password/update', to: 'password#update'

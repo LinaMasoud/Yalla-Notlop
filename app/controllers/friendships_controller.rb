@@ -13,9 +13,9 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
     if @friendship.save
-      redirect_to friendships_path
+      render json: {error:false, msg:"friendship created", user: User.find(params[:friend_id]), image: User.find(params[:friend_id]).image.url }
     else
-      redirect_to root_url
+      render json: {error:true, msg:"friendship not created"}
     end
   end
   
