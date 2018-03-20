@@ -184,7 +184,7 @@ a{
 	color: #75eb6f;
 }
 /*--responsive--*/
-@media(max-width:1920px){
+/*@media(max-width:1920px){
 	input[type="text"], input[type="password"]{
 		width: 60%;
 }
@@ -370,5 +370,5 @@ a{
 	input[type="text"], input[type="password"] {
 		width: 90%;
 	}	
-}
+}*/
 /*--/responsive--*/

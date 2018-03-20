@@ -14,6 +14,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
+  config.secret_key = 'f89cfd29e8b5825487594595195319a67797f8bed79b24ebf1e5b84e05e794bd95bdf26e45c7ffa2fa13c993ef22386229fde51862c58c851a8accfc2a41a9ec'
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   config.omniauth :facebook,"251124742095965", "153de73d2f0748b04e5d410abaf20215"
   config.omniauth :google_oauth2, "180006239602-8rolc8n74263rmqr6qb96te558s1f2uc.apps.googleusercontent.com","KKb2rfKfGXA6LxSeUgd9k2fY",callback_url: "http://localhost:3000/users/auth/google_oauth2/callback"  # Configure the class responsible to send e-mails.
