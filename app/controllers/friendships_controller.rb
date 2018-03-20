@@ -13,17 +13,21 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
     if @friendship.save
-      redirect_to friendships_path
+      render json: {error:false, msg:"friendship created", user: User.find(params[:friend_id]), image: User.find(params[:friend_id]).image.url }
     else
-      redirect_to root_url
+      render json: {error:true, msg:"friendship not created"}
     end
   end
   
   def destroy
-    @friendship = current_user.friendships.find(params[:id])
-    @friendship.destroy
-    flash[:notice] = "Removed friendship."
-    redirect_to friendships_path
+    @friendship = Friendship.where(user_id: current_user.id, friend_id:params[:id]).first
+    if @friendship.destroy
+         render json: {error:false, msg:"friendship destroied"}
+    else
+      render json: {error:true, msg:"friendship not destroiy"}
+    end
+    #flash[:notice] = "Removed friendship."
+    #redirect_to friendships_path
   end
   def find
     @friend = User.where(email: params[:fmail]).take

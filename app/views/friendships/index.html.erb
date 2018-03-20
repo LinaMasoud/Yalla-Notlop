@@ -19,7 +19,7 @@
 </div>
 </div>
 <br>
-<div class="inner_w3l_agile_grids col-md-12">
+<div class="inner_w3l_agile_grids col-md-12" id="friendList">
   <div class="col-md-12" >
   <div class="agileinfo-heading" style="padding-bottom: 10px">
     <h4>Freinds list</h4>
@@ -27,12 +27,13 @@
 </div>
   <% @friendships.each do |friendship| %>
     <% if friendship.user_id == current_user.id %>
-      <div class="col-md-3" style="padding-bottom: 10px; padding-top: 10px">
-        <div class="col-sm-4" style="width:70px;">
+      <div class='col-md-3' style='padding-bottom: 10px; padding-top: 10px'>
+        <div class='col-sm-4' style='width:70px;'>
         <%=image_tag(friendship.friend.image.url, :width => 60, :height => 60, :crop => :fill) %>
         </div>
-        <div class="col-sm-8 " style="padding-left: 30px">
+        <div class='col-sm-8'" style='padding-left: 30px'>
             <h4><%= friendship.friend.name %></h4>
+            <td><a id="<%= friendship.friend_id %>" class="rmFriend", onclick="del(this)", data=<%= friendship.friend_id  %>>Destroy</a></td>
             <%= link_to 'Unfreind', friendship, method: :delete, data: { confirm: 'Are you sure?' } %>
             
         </div>
@@ -58,7 +59,7 @@
    </div>
     <%else %>
    <div class="col-md-7" style="width:100px;">
-        <%=image_tag(user.image.url, :width => 100, :height => 100, :crop => :fill) %>
+        <%=image_tag(user.image.url, :width => 100, :height => 100, :crop => :fill, id: 'img') %>
           <!-- <img src="/assets/1.jpg" alt="My image" style="width:60px; height:60px;"/> -->
         </div>
    <div class="col-md-3">
@@ -70,7 +71,7 @@
           </tr>
           <tr class="table-active">
             <td>Add Freind</td>
-          <td><%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></td>
+            <td><a class="addFriend", data="<%= user.id %>">Add Friend</a></td>
           </tr>
     </tbody>
   </table>
@@ -105,3 +106,46 @@
 <!--  
 <%= link_to 'New Friendship', new_friendship_path %>-->
 </div>
+
+<script type="text/javascript">
+    $(".addFriend").click(function(e){
+      e.preventDefault();
+      fid = $(this).attr("data");
+      row = $(this).parents("tbody")
+      $.ajax({
+        url:"/friendships/create",
+        method:"post",
+        data:{friend_id:fid},
+        success:function(res){
+          if(!res.error)
+          {
+            row.html("");
+            $("#img").remove();
+            txt = "<div class='col-md-3' style='padding-bottom: 10px; padding-top: 10px'><div class='col-sm-4' style='width:70px;'><img src='"+res.image+"' style='width: 60px; height: 60px;' ></div><div class='col-sm-8' style='padding-left: 30px'><h4>"+res.user.name+"</h4><td><a id='"+res.user.id+"' class='rmFriend', onclick='del(this)', data='"+res.user.id+"'>Destroy</a></td><a data-confirm='Are you sure?'id='"+res.user.id+"' rel='nofollow' class='rmFriend' data-method='delete' href='/friendships/"+res.user.id+"'>Unfreind</a></div>"
+            $("#friendList").append(txt);
+          }
+
+        }
+      });
+    })
+  function del(e){
+
+
+      token = $('meta[name="csrf-token"]').attr('content');
+      fid = $(e).attr("data");
+      console.log(fid)
+      row = $(e).parents("tbody")
+      $.ajax({
+        method:"delete",
+        url:"/friendships/"+fid,
+        data:{authenticity_token:token,id:fid },
+        success:function(res){
+          
+            row.html("");
+            $("#"+fid).parent().parent().remove();
+        }
+      });
+    }
+    
+    // 
+</script>
