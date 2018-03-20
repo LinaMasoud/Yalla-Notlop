@@ -20,7 +20,6 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
 * ...
 # Yalla-Notlop
 [![Build Status](https://travis-ci.org/LinaMasoud/Yalla-Notlop.svg?branch=master)](https://travis-ci.org/LinaMasoud/Yalla-Notlop)
