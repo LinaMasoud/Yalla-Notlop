@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'password_resets/new'
-
+ 
   default_url_options :host => "example.com"
   resources :group_users
   resources :groups
@@ -22,8 +22,9 @@ Rails.application.routes.draw do
   end
   resources :friendships
   # resources :orders
-
+  # get '/orderFinish/:orderId' => 'orders#finish'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  
   get 'home/index'
   root 'home#index'
   post '/order_joined/add' => 'order_joined#add'

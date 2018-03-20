@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :finish]
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :order_params, only: [:create, :update]
 
   # GET /orders
