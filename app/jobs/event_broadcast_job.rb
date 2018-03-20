@@ -10,3 +10,4 @@ class EventBroadcastJob < ApplicationJob
   def render_event(event)
     ApplicationController.renderer.render(partial: 'events/event', locals: { event: event })
   end
+end
