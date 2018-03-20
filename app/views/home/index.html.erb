@@ -25,17 +25,7 @@
                         </tbody>
                     </table> 
                 </div>
-                <div class="col-md-6 agileits-welcome-left" id="notifi">
-                    <div class="agileinfo-heading">
-                    <h4> Friends Activity</h4>
-                    </div>
-                    <div class="agile-border"> </div>
-                    
-                    <% Event.where(user_id: current_user.id).where.not(status: 2).reverse.each do |note|
-                     %>
-                     <%=  note.message %> <a href='/orders/<%=  note.order_id %>'>Join</a><br>
-                     <% end %>
-                </div>
+                
                 <div class="clearfix"> </div>
             </div>
         </div>
