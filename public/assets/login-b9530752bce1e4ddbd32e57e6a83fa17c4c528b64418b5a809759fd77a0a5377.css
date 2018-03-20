@@ -4,6 +4,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 */
 /*--Reset code--*/
+
 body{
 	background-image: url('/assets/banner.jpg');
 	background-size: cover;
@@ -126,10 +127,6 @@ input[type="submit"] {
 	width: 30%;
 	box-sizing: border-box;
 	font-family: 'Righteous', cursive;
-	-webkit-transition: 0.5s all;
-	-moz-transition: 0.5s all;
-	-o-transition: 0.5s all;
-	-ms-transition: 0.5s all;
 	transition: 0.5s all;
 }
 input[type="submit"]:hover{
@@ -145,10 +142,6 @@ input[type="submit"]:hover{
 	background-color: transparent;
 	color: #fff;
 	font-family: 'Righteous', cursive;
-	-webkit-transition: 0.5s all;
-	-moz-transition: 0.5s all;
-	-o-transition: 0.5s all;
-	-ms-transition: 0.5s all;
 	transition: 0.5s all;
 }
 input.checkbox {
