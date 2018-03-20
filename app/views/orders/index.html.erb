@@ -14,8 +14,6 @@
                 <th scope="col">Order</th>
                 <th scope="col">Restaurant</th>
                 <th scope="col">Creator</th>
-                <!-- <th scope="col">Invited</th> -->
-                <!-- <th scope="col">Joined</th> -->
                 <th scope="col">Order Menu</th>
                 <th scope="col">Status</th>
                 <th scope="col">Actions</th>
@@ -29,19 +27,10 @@
                   <td><%= order.orderType %></td>
                   <td><%= order.orderFrom %></td>
                   <td><%= order.user.name %></td>
-                  <!-- <td>Static</td> -->
                   <td><a href="<%= order.image %>" target="_blank"><%= order.orderFrom %> Menu</a> </td>
                   <td><%= order.status %></td>
-                  <!-- <td>
-                    <a href="#">View </a>
-                    <a href="#">Finish </a>
-                    <a href="#">Cansel</a>
-                  </td> -->
-                  
                   <td>
                       <%= link_to 'Show', order %>
-                      <!-- <%= link_to 'Edit', edit_order_path(order) %> -->
-                       <!-- <%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %> -->
                   </td>
                 </tr>
             <% end %>
@@ -59,6 +48,7 @@
                 <th scope="col">Order</th>
                 <th scope="col">Restaurant</th>
                 <th scope="col">Order Menu</th>
+                <th scope="col">Status</th>
                 <th scope="col">Actions</th>
 
             </tr>
@@ -70,11 +60,13 @@
                   <td><%= order.orderType %></td>
                   <td><%= order.orderFrom %></td>
                   <td><a href="<%= order.image %>" target="_blank"><%= order.orderFrom %> Menu</a> </td>
+                  <td id="status"><%= order.status %></td>
                   <td>
-                      <%= link_to 'Show', order %> |
-                      <%= link_to 'Edit', edit_order_path(order) %> |
-                      <%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %> |
-                      <%= link_to 'Finish'  %>
+                      <%= link_to 'Show', order %> 
+                      <%= link_to 'Edit', edit_order_path(order), :id => order.id %> 
+                      <%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %> 
+                      <a id="<%= order.id %>" class="ss" onclick="finish(this)" >Finish</a>
+
                   </td>
                 </tr>
             <% end %>
@@ -86,6 +78,25 @@
       
      
       <%= will_paginate @myOrders, renderer: BootstrapPagination::Rails ,inner_window: 1, outer_window: 0%>     </div>  
+      <script type="text/javascript">
+        function finish(e){
+          console.log("sdfvdsfvsd")
+          $.ajax({
+            method:"POST",
+            url:"/orders/finish",
+            data:{orderID: $(e).attr('id'), authenticity_token:$('meta[name="csrf-token"]').attr("content")},
+            success:function(res){
+              var id = $('.ss').attr('id')
+              console.log(id)
+                $('#status').empty()
+                $('#status').append("Finished")
+                $('#'+id).remove()
+                $('#'+id).remove()
+                
+              }
+          });
+        }
+      </script>
 
 
     

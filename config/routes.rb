@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   root 'home#index'
   post '/order_joined/add' => 'order_joined#add'
   post '/order_joined/cancel' => 'order_joined#cancel'
+  post '/orders/finish' => 'orders#finish'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

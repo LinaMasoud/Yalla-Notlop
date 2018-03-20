@@ -8,14 +8,19 @@ class OrdersController < ApplicationController
   def index
     # @orders = Order.all
     # @orders = Order.where(user_id: current_user.id)
+    
     @friendships=Friendship.where(user_id: current_user.id)
     @orders = Order.joins(:users).where(users: {id: current_user.id}).paginate(page: params[:page], per_page: 2)
     @myOrders = Order.where(user_id: current_user.id).paginate(page: params[:page], per_page: 2)
+  end
+  def finish
+    Order.update(params[:orderID],:status => 'Finished')
   end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @statuss = Order.find(@order.id)
     @invited_friends = User.joins(:orders).where(orders: {id: params[:id]})
     @invited = OrdersUser.where(order_id: @order.id)
     # @invited_friends = @order.ordersusers
@@ -87,13 +92,6 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
-    end
-  end
-
-  def finish
-    Order.update(params[:id],:status => 'Finished')
-    respond_to do |format|
-      format.html { redirect_to @order, notice: 'Order Set To Be Finished.' }
     end
   end
 

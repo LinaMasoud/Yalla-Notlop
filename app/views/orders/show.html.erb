@@ -76,7 +76,7 @@
       <!-- </div> -->
     <!-- </div> -->
   </div>
-
+  <% if @statuss.status == "Waiting..." %>
   <div class="col-md-8 text-left">
   <h3>Add Item:</h3>
   <%= form_with(model: [ @order, @order.items.build ], local: true) do |form| %>
@@ -102,6 +102,7 @@
       </tbody>
     </table>
   </div>
+  <% end %>
 
   
   
