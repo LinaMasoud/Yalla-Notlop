@@ -121,7 +121,7 @@
           {
             row.html("");
             $("#img").remove();
-            txt = "<div class='col-md-3' style='padding-bottom: 10px; padding-top: 10px'><div class='col-sm-4' style='width:70px;'><img src='"+res.image+"' style='width: 60px; height: 60px;' ></div><div class='col-sm-8' style='padding-left: 30px'><h4>"+res.user.name+"</h4><td><a id='"+res.user.id+"' class='rmFriend', onclick='del(this)', data='"+res.user.id+"'>Destroy</a></td><a data-confirm='Are you sure?'id='"+res.user.id+"' rel='nofollow' class='rmFriend' data-method='delete' href='/friendships/"+res.user.id+"'>Unfreind</a></div>"
+            txt = "<div class='col-md-3' style='padding-bottom: 10px; padding-top: 10px'><div class='col-sm-4' style='width:70px;'><img src='"+res.image+"' style='width: 60px; height: 60px;' ></div><div class='col-sm-8' style='padding-left: 30px'><h4>"+res.user.name+"</h4><td><a id='"+res.user.id+"' class='rmFriend', onclick='del(this)', data='"+res.user.id+"'>Destroy</a></td></div>"
             $("#friendList").append(txt);
           }
 
