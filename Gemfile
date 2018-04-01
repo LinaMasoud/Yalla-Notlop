@@ -21,9 +21,6 @@ group :development, :test do
   gem 'mysql2', '>= 0.3.18', '< 0.5'
 end
 
-group :production do
-  gem 'pg'
-end
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'

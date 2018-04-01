@@ -26,3 +26,12 @@ services:
       DB_PASSWORD: password
       DB_NAME: myapp
       DB_HOST: db
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: DockerFile
+    image: nginx
+    links:
+      - web
+    ports:
+      - "8080:80"
